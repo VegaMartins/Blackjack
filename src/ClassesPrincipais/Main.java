@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Excecoes.NumeroJogadoresInvalidoException;
+import ClassesSuporte.Carta;
 import ClassesSuporte.HistoricoJogo;
 
 
@@ -92,36 +93,40 @@ public static void iniciarJogo(Scanner scanner, Baralho baralho, List<Jogador> j
     boolean continuarJogando = true;
 
     while (continuarJogando) {
-        configurarEIniciarRodada(baralho, jogadores);
+    configurarEIniciarRodada(baralho, jogadores);
 
-        for (Jogador jogador : jogadores) {
-            boolean continuarComprando = true;
+    for (Jogador jogador : jogadores) {
+        boolean continuarComprando = true;
 
-            while (continuarComprando) {
-                System.out.println(jogador.getNome() + ", na sua mao: " + jogador.getMao() +
-                        ", total: " + jogador.getValorMao());
+        while (continuarComprando) {
+            System.out.println(jogador.getNome() + ", na sua mao: " + jogador.getMao() +
+                    ", total: " + jogador.getValorMao());
 
-                if (jogador.getValorMao() == 21) {
-                    System.out.println("Blackjack!");
-                    continuarComprando = false;
-                } else {
-                    System.out.print("Deseja mais uma carta? (s/n): ");
-                    String escolha = scanner.nextLine();
+            if (jogador.getValorMao() == 21) {
+                System.out.println("Blackjack!");
+                continuarComprando = false;
+            } else {
+                System.out.print("Deseja mais uma carta? (s/n): ");
+                String escolha = scanner.nextLine();
 
-                    if (escolha.equalsIgnoreCase("s")) {
-                        jogador.adicionarCarta(baralho.distribuirCarta());
+                if (escolha.equalsIgnoreCase("s")) {
+                    Carta cartaDistribuida = baralho.distribuirCarta();
+                    jogador.adicionarCarta(cartaDistribuida);
 
-                        if (jogador.Estouro()) {
-                            System.out.println("Estourou! Voce ultrapassou 21. Sua pontuacao: " +
-                                    jogador.getValorMao());
-                            continuarComprando = false;
-                        }
-                    } else {
+                    System.out.println("Carta recebida: " + cartaDistribuida);
+
+                    if (jogador.Estouro()) {
+                        System.out.println( "Estourou! Voce ultrapassou 21. Sua pontuacao: " +
+                                jogador.getValorMao() );
                         continuarComprando = false;
                     }
+                } else {
+                    continuarComprando = false;
                 }
             }
         }
+    }
+
 
         String resultado = determinarResultado(jogadores);
         System.out.println("\n----- Resultado da Partida -----");

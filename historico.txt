@@ -3,3 +3,7 @@
 
 Maria - Pontuacao: 24 - Resultado: -Houve empate
 Joao - Pontuacao: 23 - Resultado: -Houve empate
+gabi - Pontua��o: 3 - Resultado: -Vit�ria do gabi
+vera - Pontua��o: 20 - Resultado: -Vit�ria do vera
+vera - Pontua��o: 23 - Resultado: -Houve empate
+gabi - Pontua��o: 29 - Resultado: -Houve empate
